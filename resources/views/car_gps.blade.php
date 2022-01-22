@@ -14,95 +14,117 @@
   <div id="googleMap" style="width:100%;height:600px;"></div>
 
   <script>
-    function myMap() {
-      var position = {
-        lat: 18.8945854,
-        lng: 99.0098195
+    var map,
+      // user_input = 'all',
+      marker,
+      // circle,
+      i = 0,
+      pos,
+      // pos1,
+      directionsService,
+      directionsRenderer,
+      // routeLine = null,
+      info_name = true,
+      // hideMarkers = [],
+      // myRange = 100
+
+
+    // jobs_id = null
+    url = `car_gps_data`;
+
+    function initMap() {
+      // clicked = null;
+      // hideMarkers = []
+
+      const directionsService = new google.maps.DirectionsService;
+      const directionsRenderer = new google.maps.DirectionsRenderer({
+        map: map,
+        suppressMarkers: true,
+        suppressPolylines: false,
+        suppressBicyclingLayer: true,
+        polylineOptions: {
+          strokeColor: '#0000FF',
+          strokeWeight: 3
+        }
+      });
+
+
+      map = new google.maps.Map(document.getElementById("googleMap"), {
+        zoom: 15,
+      });
+      directionsRenderer.setMap(map);
+
+
+      //-----------------------location พิกัดที่เราอยู่---------------------------------//
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+            // console.log("0")
+            // console.log(pos)
+            map.setCenter(pos);
+
+            //-----------------------marker กับ circle ---------------------------------//
+            marker = new google.maps.Marker({
+              // icon: '../images/car_icon.png',
+              map: map,
+              animation: google.maps.Animation.DROP,
+              position: pos
+            });
+
+
+            // console.log('00')
+            // console.log(marker.position.lat())
+            // console.log(marker.position.lng())
+          },
+          function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+
+      } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
       }
-      var maps;
 
-      url = `car_gps_data`;
 
-      var locations = [
-        ['Toyota', 18.8945854, 99.0098195],
-        ['Isuzu', 18.8842692, 99.0047842],
-        ['Honda', 18.8937735, 99.0034448],
-        ['Nissan', 18.8987441, 99.0133599]
-      ];
+      // =================================================================
+      const infoWindow = new google.maps.InfoWindow();
+      $.getJSON(url, function(markers) {
 
-      // var jsonObj = [
-      //   {"location":"Toyota", "lat":"18.8945854", 'lng':"99.0098195"},
-      //   {"location":"Isuzu", "lat":"18.8842692", 'lng':"99.0047842"},
-      //   {"location":"Honda", "lat":"18.8937735", 'lng':"99.0034448"},
-      //   {"location":"Nissan", "lat":"18.8987441", 'lng':"99.0133599"},
-      // ]
+        const ceter_position = new google.maps.LatLng(pos)
 
-      var mapProp = {
-        // center: new google.maps.LatLng(18.9306783, 99.1841769),
-        center: position,
-        zoom: 5,
-      };
-
-      // แสดงแผนที่
-      var maps = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-
-      // แสดง/สรา้ง marker
-      // var marker = new google.maps.Marker({
-      //   icon: "images/car-icon.png",
-      //   // position: position,
-      //   map: maps
-      // });
-
-      // วนแสดง marker หลายตัว
-      // var marker, i, info;
-      // for (i = 0; i < locations.length; i++) {
-      //   // สร้าง marker
-      //   marker = new google.maps.Marker({
-      //     position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-      //     map: maps,
-      //     icon: "images/car-icon.png"
-      //     // title: locations[i][0]
-      //   });
-
-      //   // สร้าง popup
-      //   info = new google.maps.InfoWindow();
-      //   google.maps.event.addListener(marker, 'click', (function(marker, i) {
-      //       return function() {
-      //         info.setContent(locations[i][0]);
-      //         info.open(maps, marker);
-      //       }
-      //     })
-      //     (marker, i)
-      //   );
-      // }
-
-      // ดึงข้อมูลจาก Database
-      var markers, info;
-      $.getJSON(url, function(jsonObj) {
-        console.log(url);
         for (let i = 0; i < markers.length; i++) {
 
           const marker_position = new google.maps.LatLng(markers[i][5], markers[i][6])
-          // const checkDistance = google.maps.geometry.spherical.computeDistanceBetween(marker_position, ceter_position)
+          const checkDistance = google.maps.geometry.spherical.computeDistanceBetween(marker_position, ceter_position)
 
 
 
           let marker = new google.maps.Marker({
             position: new google.maps.LatLng(markers[i][5], markers[i][6]),
-            // icon: (markers[i][6] == 'fulltime') ? '../image/bluepoint03.png' : '../image/greenpoint02.png',
+            icon: "images/car-icon.png",
             map: map,
             optimized: false,
-            title: markers[i][1],
+            // title: markers[i][1],
           });
           marker._infowindow = new google.maps.InfoWindow({
             content: markers[i][1]
           });
+
+
+          if (info_name) {
+            marker._infowindow.open(map, marker);
+          }
+
+
         }
       });
     }
   </script>
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAF6dOf5hnd662VGA_QlkXtuODatOq5Ick&callback=myMap"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAF6dOf5hnd662VGA_QlkXtuODatOq5Ick&callback=initMap"></script>
 
 </body>
 
