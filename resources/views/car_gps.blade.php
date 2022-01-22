@@ -8,6 +8,11 @@
   <title>Tracking Car</title>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -29,8 +34,8 @@
       // myRange = 100
 
 
-    // jobs_id = null
-    url = `car_gps_data`;
+      // jobs_id = null
+      url = `car_gps_data`;
 
     function initMap() {
       // clicked = null;
@@ -50,7 +55,7 @@
 
 
       map = new google.maps.Map(document.getElementById("googleMap"), {
-        zoom: 15,
+        zoom: 18,
       });
       directionsRenderer.setMap(map);
 
@@ -100,11 +105,17 @@
           const marker_position = new google.maps.LatLng(markers[i][5], markers[i][6])
           const checkDistance = google.maps.geometry.spherical.computeDistanceBetween(marker_position, ceter_position)
 
-
+          // resize image
+          var icon = {
+            url: "images/container5.png", // url
+            scaledSize: new google.maps.Size(55, 55), // scaled size
+            origin: new google.maps.Point(0, 0), // origin
+            anchor: new google.maps.Point(0, 0) // anchor
+          };
 
           let marker = new google.maps.Marker({
             position: new google.maps.LatLng(markers[i][5], markers[i][6]),
-            icon: "images/car-icon.png",
+            icon: icon,
             map: map,
             optimized: false,
             // title: markers[i][1],
