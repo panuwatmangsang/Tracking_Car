@@ -73,7 +73,7 @@
 
             //-----------------------marker กับ circle ---------------------------------//
             marker = new google.maps.Marker({
-              // icon: '../images/car_icon.png',
+              // icon: '../images/container5.png',
               map: map,
               animation: google.maps.Animation.DROP,
               position: pos
@@ -81,8 +81,8 @@
 
 
             // console.log('00')
-            // console.log(marker.position.lat())
-            // console.log(marker.position.lng())
+            console.log(marker.position.lat())
+            console.log(marker.position.lng())
           },
           function() {
             handleLocationError(true, infoWindow, map.getCenter());

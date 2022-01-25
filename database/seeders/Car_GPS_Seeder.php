@@ -16,30 +16,48 @@ class Car_GPS_Seeder extends Seeder
     public function run()
     {
         Car_gps::create([
-            'car_name' => 'Toyata',
-            'car_address' => 'เมือง',
-            'car_city' => 'พะเยา',
+            'car_name' => 'car_1',
+            'car_address' => 'สันทราย',
+            'car_city' => 'เชียงใหม่',
             'car_state' => '102 ทางหลวง',
-            'latitude' => '19.029557927567264',
-            'longtitude' => '99.93113432614608'
+            'latitude' => '18.8910339',
+            'longtitude' => '99.0085884'
         ]);
 
         Car_gps::create([
-            'car_name' => 'Isuzu',
-            'car_address' => 'เมือง',
-            'car_city' => 'พะเยา',
+            'car_name' => 'car_1',
+            'car_address' => 'สันทราย',
+            'car_city' => 'เชียงใหม่',
             'car_state' => '102 ทางหลวง',
-            'latitude' => '19.030289318113148',
-            'longtitude' => '99.92986957028076'
+            'latitude' => '18.891422',
+            'longtitude' => '99.008072'
         ]);
 
         Car_gps::create([
-            'car_name' => 'Honda',
-            'car_address' => 'เมือง',
-            'car_city' => 'พะเยา',
+            'car_name' => 'car_1',
+            'car_address' => 'สันทราย',
+            'car_city' => 'เชียงใหม่',
             'car_state' => '102 ทางหลวง',
-            'latitude' => '19.030141805088093',
-            'longtitude' => '99.93146020102455'
+            'latitude' => '18.891508',
+            'longtitude' => '99.008059'
+        ]);
+        
+        Car_gps::create([
+            'car_name' => 'car_1',
+            'car_address' => 'สันทราย',
+            'car_city' => 'เชียงใหม่',
+            'car_state' => '102 ทางหลวง',
+            'latitude' => '18.891706',
+            'longtitude' => '99.008051'
+        ]);
+        
+        Car_gps::create([
+            'car_name' => 'car_1',
+            'car_address' => 'สันทราย',
+            'car_city' => 'เชียงใหม่',
+            'car_state' => '102 ทางหลวง',
+            'latitude' => '18.891822',
+            'longtitude' => '99.008040'
         ]);
     }
 }
