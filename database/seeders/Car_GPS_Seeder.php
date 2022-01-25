@@ -16,48 +16,48 @@ class Car_GPS_Seeder extends Seeder
     public function run()
     {
         Car_gps::create([
-            'car_name' => 'car_1',
-            'car_address' => 'สันทราย',
-            'car_city' => 'เชียงใหม่',
-            'car_state' => '102 ทางหลวง',
-            'latitude' => '18.8910339',
-            'longtitude' => '99.0085884'
+            'car_name' => 'กฟน.1022',
+            'car_address' => 'เขตบางซื่อ',
+            'car_city' => 'กรุงเทพมหานคร',
+            'car_state' => 'ถ.ประชาชื่น',
+            'latitude' => '13.809325',
+            'longtitude' => '100.534088'
         ]);
 
         Car_gps::create([
-            'car_name' => 'car_1',
-            'car_address' => 'สันทราย',
-            'car_city' => 'เชียงใหม่',
-            'car_state' => '102 ทางหลวง',
-            'latitude' => '18.891422',
-            'longtitude' => '99.008072'
+            'car_name' => 'กฟน.1022',
+            'car_address' => 'เขตบางซื่อ',
+            'car_city' => 'กรุงเทพมหานคร',
+            'car_state' => 'ถ.ประชาชื่น',
+            'latitude' => '13.809825',
+            'longtitude' => '100.534152'
         ]);
 
         Car_gps::create([
-            'car_name' => 'car_1',
-            'car_address' => 'สันทราย',
-            'car_city' => 'เชียงใหม่',
-            'car_state' => '102 ทางหลวง',
-            'latitude' => '18.891508',
-            'longtitude' => '99.008059'
+            'car_name' => 'กฟน.1022',
+            'car_address' => 'เขตบางซื่อ',
+            'car_city' => 'กรุงเทพมหานคร',
+            'car_state' => 'ถ.ประชาชื่น',
+            'latitude' => '13.810211',
+            'longtitude' => '100.534227'
         ]);
         
         Car_gps::create([
-            'car_name' => 'car_1',
-            'car_address' => 'สันทราย',
-            'car_city' => 'เชียงใหม่',
-            'car_state' => '102 ทางหลวง',
-            'latitude' => '18.891706',
-            'longtitude' => '99.008051'
+            'car_name' => 'กฟน.1022',
+            'car_address' => 'เขตบางซื่อ',
+            'car_city' => 'กรุงเทพมหานคร',
+            'car_state' => 'ถ.ประชาชื่น',
+            'latitude' => '13.810596',
+            'longtitude' => '100.534345'
         ]);
         
         Car_gps::create([
-            'car_name' => 'car_1',
-            'car_address' => 'สันทราย',
-            'car_city' => 'เชียงใหม่',
-            'car_state' => '102 ทางหลวง',
-            'latitude' => '18.891822',
-            'longtitude' => '99.008040'
+            'car_name' => 'กฟน.1022',
+            'car_address' => 'เขตบางซื่อ',
+            'car_city' => 'กรุงเทพมหานคร',
+            'car_state' => 'ถ.ประชาชื่น',
+            'latitude' => '13.810950',
+            'longtitude' => '100.534421'
         ]);
     }
 }

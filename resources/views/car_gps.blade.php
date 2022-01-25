@@ -55,7 +55,8 @@
 
 
       map = new google.maps.Map(document.getElementById("googleMap"), {
-        zoom: 18,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
       });
       directionsRenderer.setMap(map);
 
@@ -81,8 +82,8 @@
 
 
             // console.log('00')
-            console.log(marker.position.lat())
-            console.log(marker.position.lng())
+            // console.log(marker.position.lat())
+            // console.log(marker.position.lng())
           },
           function() {
             handleLocationError(true, infoWindow, map.getCenter());
@@ -121,7 +122,7 @@
             // title: markers[i][1],
           });
           marker._infowindow = new google.maps.InfoWindow({
-            content: markers[i][1]
+            content: markers[i][7]
           });
 
 
