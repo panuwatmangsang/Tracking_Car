@@ -99,12 +99,12 @@
       const infoWindow = new google.maps.InfoWindow();
       $.getJSON(url, function(markers) {
 
-        const ceter_position = new google.maps.LatLng(pos)
+        // const ceter_position = new google.maps.LatLng(pos)
 
         for (let i = 0; i < markers.length; i++) {
 
           const marker_position = new google.maps.LatLng(markers[i][5], markers[i][6])
-          const checkDistance = google.maps.geometry.spherical.computeDistanceBetween(marker_position, ceter_position)
+          // const checkDistance = google.maps.geometry.spherical.computeDistanceBetween(marker_position, ceter_position)
 
           // resize image
           var icon = {
@@ -115,24 +115,28 @@
           };
 
           let marker = new google.maps.Marker({
-            position: new google.maps.LatLng(markers[i][5], markers[i][6]),
+            position: new google.maps.LatLng(markers[i][2], markers[i][3]),
             icon: icon,
             map: map,
-            optimized: false,
+            // optimized: false,
             // title: markers[i][1],
           });
           marker._infowindow = new google.maps.InfoWindow({
-            content: markers[i][7]
+            content: markers[i][3]
           });
-
 
           if (info_name) {
             marker._infowindow.open(map, marker);
+            map.setCenter(marker.getPosition());
           }
-
-
         }
       });
+      changeMarkerPosition(marker);
+    }
+
+    function changeMarkerPosition(marker) {
+      var latlng = new google.maps.LatLng(40.748774, -73.985763);
+      marker.setPosition(latlng);
     }
   </script>
 

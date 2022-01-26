@@ -28,23 +28,20 @@ Route::get('/car_gps_data', function (Request $request) {
     $dbname = "tracking_gps";
     $db = new mysqli($servername, $uname, $pass, $dbname);
 
-    $query =  $db->query("SELECT * FROM car_gps");
+    // $query =  $db->query("SELECT * FROM car_locations");
     // $query =  $db->query("SELECT * FROM car_gps WHERE updated_at='2022-01-25 07:13:31'");
     // $query =  $db->query("SELECT * FROM car_gps WHERE updated_at = (SELECT MIN(updated_at) AS updated_at FROM car_gps)");
-    // $query = $db->query("SELECT * FROM car_gps ORDER BY updated_at ASC LIMIT 1");
+    $query = $db->query("SELECT * FROM car_locations ORDER BY updated_at ASC LIMIT 1");
     $resultArray = array();
 
     while ($row = $query->fetch_assoc()) {
+        $car_location_id = $row['car_location_id'];
         $car_id = $row['car_id'];
-        $car_name = $row['car_name'];
-        $car_address = $row['car_address'];
-        $car_city = $row['car_city'];
-        $car_state = $row['car_state'];
         $latitude = $row['latitude'];
         $longtitude = $row['longtitude'];
         $created_at = $row['created_at'];
         $updated_at = $row['updated_at'];
-        array_push($resultArray, [$car_id, $car_name, $car_address, $car_city, $car_state, $latitude, $longtitude, $created_at, $updated_at]);
+        array_push($resultArray, [$car_location_id, $car_id, $latitude, $longtitude, $created_at, $updated_at]);
     }
 
     return ($resultArray);
