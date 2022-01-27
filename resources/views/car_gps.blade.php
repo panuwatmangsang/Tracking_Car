@@ -19,124 +19,94 @@
   <div id="googleMap" style="width:100%;height:600px;"></div>
 
   <script>
-    var map,
-      // user_input = 'all',
-      marker,
-      // circle,
-      i = 0,
-      pos,
-      // pos1,
-      directionsService,
-      directionsRenderer,
-      // routeLine = null,
-      info_name = true,
-      // hideMarkers = [],
-      // myRange = 100
-
-
-      // jobs_id = null
-      url = `car_gps_data`;
+    url = `car_gps_data`;
 
     function initMap() {
-      // clicked = null;
-      // hideMarkers = []
 
-      const directionsService = new google.maps.DirectionsService;
-      const directionsRenderer = new google.maps.DirectionsRenderer({
-        map: map,
-        suppressMarkers: true,
-        suppressPolylines: false,
-        suppressBicyclingLayer: true,
-        polylineOptions: {
-          strokeColor: '#0000FF',
-          strokeWeight: 3
-        }
-      });
-
-
-      map = new google.maps.Map(document.getElementById("googleMap"), {
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      });
-      directionsRenderer.setMap(map);
-
-
-      //-----------------------location พิกัดที่เราอยู่---------------------------------//
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-            // console.log("0")
-            // console.log(pos)
-            map.setCenter(pos);
-
-            //-----------------------marker กับ circle ---------------------------------//
-            marker = new google.maps.Marker({
-              // icon: '../images/container5.png',
-              map: map,
-              animation: google.maps.Animation.DROP,
-              position: pos
-            });
-
-
-            // console.log('00')
-            // console.log(marker.position.lat())
-            // console.log(marker.position.lng())
-          },
-          function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-
-      } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
+      var position = {
+        lat: 13.809308,
+        lng: 100.5329657
       }
+      var mapProp = {
+        // center: new google.maps.LatLng(18.8945854, 99.0098195),
+        center: position,
+        zoom: 18,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      // แสดงแผนที่
+      var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
-
-      // =================================================================
-      const infoWindow = new google.maps.InfoWindow();
       $.getJSON(url, function(markers) {
 
         // const ceter_position = new google.maps.LatLng(pos)
+        var time = 1000;
+        var currentTimeout = null;
 
         for (let i = 0; i < markers.length; i++) {
+          
+          const myTimeout = setTimeout(() => {
+            const marker_position = new google.maps.LatLng(markers[i][2], markers[i][3])
+            // console.log(markers[i][2], markers[i][3]);
 
-          const marker_position = new google.maps.LatLng(markers[i][5], markers[i][6])
-          // const checkDistance = google.maps.geometry.spherical.computeDistanceBetween(marker_position, ceter_position)
+            // resize image
+            var icon = {
+              url: "images/container5.png", // url
+              scaledSize: new google.maps.Size(55, 55), // scaled size
+              origin: new google.maps.Point(0, 0), // origin
+              anchor: new google.maps.Point(0, 0) // anchor
+            };
 
-          // resize image
-          var icon = {
-            url: "images/container5.png", // url
-            scaledSize: new google.maps.Size(55, 55), // scaled size
-            origin: new google.maps.Point(0, 0), // origin
-            anchor: new google.maps.Point(0, 0) // anchor
-          };
+            let marker = new google.maps.Marker({
+              position: new google.maps.LatLng(markers[i][2], markers[i][3]),
+              icon: icon,
+              map: map,
+              // optimized: false,
+              // title: markers[i][1],
+            });
 
-          let marker = new google.maps.Marker({
-            position: new google.maps.LatLng(markers[i][2], markers[i][3]),
-            icon: icon,
-            map: map,
-            // optimized: false,
-            // title: markers[i][1],
-          });
-          marker._infowindow = new google.maps.InfoWindow({
-            content: markers[i][3]
-          });
+            console.log(markers[i][2], markers[i][3]);
+          }, time += 1000);
 
-          if (info_name) {
-            marker._infowindow.open(map, marker);
-            map.setCenter(marker.getPosition());
-          }
+          // marker._infowindow = new google.maps.InfoWindow({
+          //   content: markers[i][3]
+          // });
+
         }
       });
-      changeMarkerPosition(marker);
+
+      // google.maps.event.addListener(map, 'click', function(event) {
+      //   var result = [event.latLng.lat(), event.latLng.lng()];
+      //   transition(result);
+      // });
     }
 
-    function changeMarkerPosition(marker) {
-      var latlng = new google.maps.LatLng(40.748774, -73.985763);
+    //Load google map
+    // google.maps.event.addDomListener(window, 'load', initialize);
+
+
+    var numDeltas = 100;
+    var delay = 10; //milliseconds
+    var i = 0;
+    var deltaLat;
+    var deltaLng;
+
+    function transition(result) {
+      i = 0;
+      deltaLat = (result[0] - position[0]) / numDeltas;
+      deltaLng = (result[1] - position[1]) / numDeltas;
+      moveMarker();
+    }
+
+    function moveMarker() {
+      position[0] += deltaLat;
+      position[1] += deltaLng;
+      var latlng = new google.maps.LatLng(position[0], position[1]);
+      marker.setTitle("Latitude:" + position[0] + " | Longitude:" + position[1]);
       marker.setPosition(latlng);
+      if (i != numDeltas) {
+        i++;
+        setTimeout(moveMarker, delay);
+      }
     }
   </script>
 
