@@ -24,8 +24,8 @@
     function initMap() {
 
       var position = {
-        lat: 13.809308,
-        lng: 100.5329657
+        lat: 13.806232667930393,
+        lng: 100.53329308762939
       }
       var mapProp = {
         // center: new google.maps.LatLng(18.8945854, 99.0098195),
