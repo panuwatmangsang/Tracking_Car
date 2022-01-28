@@ -20,15 +20,18 @@ Route::get('/', function () {
 });
 
 Route::get('/car_gps', [Car_GPS_Controller::class, 'index'])->name('car_gps');
-
+// echo "test";
 Route::get('/car_gps_data', function (Request $request) {
+    echo "test";
     $uname = "root";
     $pass = "";
+    // $servername = "127.0.0.1";
     $servername = "localhost";
     $dbname = "tracking_gps";
+    
     $db = new mysqli($servername, $uname, $pass, $dbname);
-
     $query =  $db->query("SELECT * FROM car_locations");
+    
     // $query =  $db->query("SELECT * FROM car_gps WHERE updated_at='2022-01-25 07:13:31'");
     // $query =  $db->query("SELECT * FROM car_gps WHERE updated_at = (SELECT MIN(updated_at) AS updated_at FROM car_gps)");
     // $query = $db->query("SELECT * FROM car_locations ORDER BY updated_at ASC LIMIT 1");
