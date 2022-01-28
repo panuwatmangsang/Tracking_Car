@@ -16,30 +16,48 @@ class Car_GPS_Seeder extends Seeder
     public function run()
     {
         Car_gps::create([
-            'car_name' => 'Toyata',
-            'car_address' => 'เมือง',
-            'car_city' => 'พะเยา',
-            'car_state' => '102 ทางหลวง',
-            'latitude' => '19.029557927567264',
-            'longtitude' => '99.93113432614608'
+            'car_name' => 'กฟน.1022',
+            'car_address' => 'เขตบางซื่อ',
+            'car_city' => 'กรุงเทพมหานคร',
+            'car_state' => 'ถ.ประชาชื่น',
+            'latitude' => '13.809325',
+            'longtitude' => '100.534088'
         ]);
 
         Car_gps::create([
-            'car_name' => 'Isuzu',
-            'car_address' => 'เมือง',
-            'car_city' => 'พะเยา',
-            'car_state' => '102 ทางหลวง',
-            'latitude' => '19.030289318113148',
-            'longtitude' => '99.92986957028076'
+            'car_name' => 'กฟน.1022',
+            'car_address' => 'เขตบางซื่อ',
+            'car_city' => 'กรุงเทพมหานคร',
+            'car_state' => 'ถ.ประชาชื่น',
+            'latitude' => '13.809825',
+            'longtitude' => '100.534152'
         ]);
 
         Car_gps::create([
-            'car_name' => 'Honda',
-            'car_address' => 'เมือง',
-            'car_city' => 'พะเยา',
-            'car_state' => '102 ทางหลวง',
-            'latitude' => '19.030141805088093',
-            'longtitude' => '99.93146020102455'
+            'car_name' => 'กฟน.1022',
+            'car_address' => 'เขตบางซื่อ',
+            'car_city' => 'กรุงเทพมหานคร',
+            'car_state' => 'ถ.ประชาชื่น',
+            'latitude' => '13.810211',
+            'longtitude' => '100.534227'
+        ]);
+        
+        Car_gps::create([
+            'car_name' => 'กฟน.1022',
+            'car_address' => 'เขตบางซื่อ',
+            'car_city' => 'กรุงเทพมหานคร',
+            'car_state' => 'ถ.ประชาชื่น',
+            'latitude' => '13.810596',
+            'longtitude' => '100.534345'
+        ]);
+        
+        Car_gps::create([
+            'car_name' => 'กฟน.1022',
+            'car_address' => 'เขตบางซื่อ',
+            'car_city' => 'กรุงเทพมหานคร',
+            'car_state' => 'ถ.ประชาชื่น',
+            'latitude' => '13.810950',
+            'longtitude' => '100.534421'
         ]);
     }
 }
