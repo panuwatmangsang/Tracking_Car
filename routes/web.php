@@ -22,9 +22,9 @@ Route::get('/', function () {
 Route::get('/car_gps', [Car_GPS_Controller::class, 'index'])->name('car_gps');
 
 Route::get('/car_gps_data', function (Request $request) {
-    $uname = "root";
-    $pass = "";
-    $servername = "localhost";
+    $uname = "tracking_gps";
+    $pass = "123456";
+    $servername = "192.168.1.19";
     $dbname = "tracking_gps";
     $db = new mysqli($servername, $uname, $pass, $dbname);
 

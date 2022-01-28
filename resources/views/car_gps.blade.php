@@ -30,7 +30,7 @@
       var mapProp = {
         // center: new google.maps.LatLng(18.8945854, 99.0098195),
         center: position,
-        zoom: 15,
+        zoom: 18,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       // แสดงแผนที่
