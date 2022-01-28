@@ -30,7 +30,7 @@
       var mapProp = {
         // center: new google.maps.LatLng(18.8945854, 99.0098195),
         center: position,
-        zoom: 18,
+        zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       // แสดงแผนที่
@@ -41,9 +41,10 @@
         // const ceter_position = new google.maps.LatLng(pos)
         var time = 1000;
         var currentTimeout = null;
+        var time_loop = 1000;
 
         for (let i = 0; i < markers.length; i++) {
-          
+
           const myTimeout = setTimeout(() => {
             const marker_position = new google.maps.LatLng(markers[i][2], markers[i][3])
             // console.log(markers[i][2], markers[i][3]);
@@ -63,10 +64,21 @@
               // optimized: false,
               // title: markers[i][1],
             });
-
+            
+            if (i < (markers.length - 1)) {
+              setTimeout(() => {
+              marker.setMap(null);
+            }, time_loop);
+            }
+            
             console.log(markers[i][2], markers[i][3]);
-          }, time += 1000);
+          }, time += time_loop);
 
+          routeLine = new google.maps.Polyline({
+            strokeColor: '#FA8072',
+            strokeOpacity: 1.0,
+            strokeWeight: 5
+          });
           // marker._infowindow = new google.maps.InfoWindow({
           //   content: markers[i][3]
           // });
