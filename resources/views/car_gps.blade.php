@@ -16,84 +16,119 @@
 </head>
 
 <body>
+  <h3 id="map-title"></h3>
   <div id="googleMap" style="width:100%;height:600px;"></div>
 
   <script>
     url = `car_gps_data`;
+    var time_set = 1000;
+    var currentTimeout = null;
+    var icon_size = 35;
 
     function initMap() {
 
       var position = {
-        lat: 13.806232667930393,
-        lng: 100.53329308762939
+        lat: 13.809308,
+        lng: 100.5329657
       }
       var mapProp = {
         // center: new google.maps.LatLng(18.8945854, 99.0098195),
         center: position,
-        zoom: 18,
+        zoom: 17,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };
       // แสดงแผนที่
       var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
 
       $.getJSON(url, function(markers) {
-
-        // const ceter_position = new google.maps.LatLng(pos)
-        var time = 1000;
-        var currentTimeout = null;
-        var time_loop = 1000;
-
-        for (let i = 0; i < markers.length; i++) {
-
+        var time_start = 0;
+        var count_markers = Object.keys(markers).length;
+        var idx = 1;
+        $.each(markers, function(time, cars) {
           const myTimeout = setTimeout(() => {
-            const marker_position = new google.maps.LatLng(markers[i][2], markers[i][3])
-            // console.log(markers[i][2], markers[i][3]);
-
-            // resize image
-            var icon = {
-              url: "images/container5.png", // url
-              scaledSize: new google.maps.Size(55, 55), // scaled size
-              origin: new google.maps.Point(0, 0), // origin
-              anchor: new google.maps.Point(0, 0) // anchor
-            };
-
-            let marker = new google.maps.Marker({
-              position: new google.maps.LatLng(markers[i][2], markers[i][3]),
-              icon: icon,
-              map: map,
-              // optimized: false,
-              // title: markers[i][1],
-            });
-            
-            if (i < (markers.length - 1)) {
-              setTimeout(() => {
-              marker.setMap(null);
-            }, time_loop);
+            const string_time = new Date(time);
+            $('#map-title').html(string_time.toLocaleString('th-TH', {day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit'})); //แสดงเวลา
+            for (var i = 0; i < cars.length; i++) {
+              // console.log('cars', cars[i]);
+              const marker_position = new google.maps.LatLng(cars[i].latitude, cars[i].longtitude);
+              // resize image
+              var icon = {
+                url: "images/cars/" + cars[i].car_id + ".png", // url
+                scaledSize: new google.maps.Size(icon_size, icon_size), // scaled size
+                origin: new google.maps.Point(0, 0), // origin
+                anchor: new google.maps.Point(0, 0) // anchor
+              };
+              let marker = new google.maps.Marker({
+                position: new google.maps.LatLng(cars[i].latitude, cars[i].longtitude),
+                icon: icon,
+                map: map,
+                // optimized: false,
+                title: "CAR_ID::" + cars[i].car_id,
+              });
+              if (idx < count_markers) {
+                setTimeout(() => {
+                  marker.setMap(null);
+                }, time_set);
+              }
             }
+            idx++;
+          }, time_start += time_set);
+        });
+          // const ceter_position = new google.maps.LatLng(pos)
+
+      //   for (let i = 0; i < markers.length; i++) {
+      //     const myTimeout = setTimeout(() => {
+      //       const marker_position = new google.maps.LatLng(markers[i][2], markers[i][3])
+      //       // console.log(markers[i][2], markers[i][3]);
+
+      //       // resize image
+      //       var icon = {
+      //         url: "images/container5.png", // url
+      //         scaledSize: new google.maps.Size(55, 55), // scaled size
+      //         origin: new google.maps.Point(0, 0), // origin
+      //         anchor: new google.maps.Point(0, 0) // anchor
+      //       };
+
+      //       let marker = new google.maps.Marker({
+      //         position: new google.maps.LatLng(markers[i][2], markers[i][3]),
+      //         icon: icon,
+      //         map: map,
+      //         // optimized: false,
+      //         // title: markers[i][1],
+      //       });
             
-            console.log(markers[i][2], markers[i][3]);
-          }, time += time_loop);
+      //       if (i < (markers.length - 1)) {
+      //         setTimeout(() => {
+      //         marker.setMap(null);
+      //       }, time_loop);
+      //       }
+            
+      //       console.log(markers[i][2], markers[i][3]);
+      //     }, time += time_loop);
 
-          routeLine = new google.maps.Polyline({
-            strokeColor: '#FA8072',
-            strokeOpacity: 1.0,
-            strokeWeight: 5
-          });
-          // marker._infowindow = new google.maps.InfoWindow({
-          //   content: markers[i][3]
-          // });
+      //     routeLine = new google.maps.Polyline({
+      //       strokeColor: '#FA8072',
+      //       strokeOpacity: 1.0,
+      //       strokeWeight: 5
+      //     });
+      //     // marker._infowindow = new google.maps.InfoWindow({
+      //     //   content: markers[i][3]
+      //     // });
 
-        }
+        // }
       });
 
-      // google.maps.event.addListener(map, 'click', function(event) {
-      //   var result = [event.latLng.lat(), event.latLng.lng()];
-      //   transition(result);
-      // });
+      google.maps.event.addListener(map, 'click', function(event) {
+        var result = [event.latLng.lat(), event.latLng.lng()];
+        transition(result);
+      });
     }
 
     //Load google map
     // google.maps.event.addDomListener(window, 'load', initialize);
+    function createMarker(attr){
+
+    }
 
 
     var numDeltas = 100;
