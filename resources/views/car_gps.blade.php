@@ -143,7 +143,7 @@
       deltaLng = (result[1] - position[1]) / numDeltas;
       moveMarker();
     }
-
+//move marker
     function moveMarker() {
       position[0] += deltaLat;
       position[1] += deltaLng;
