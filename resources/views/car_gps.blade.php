@@ -53,7 +53,7 @@
               const marker_position = new google.maps.LatLng(cars[i].latitude, cars[i].longtitude);
               // resize image
               var icon = {
-                url: "images/cars/" + cars[i].car_id + ".png", // url
+                url: cars[i].car_icon, // url
                 scaledSize: new google.maps.Size(icon_size, icon_size), // scaled size
                 origin: new google.maps.Point(0, 0), // origin
                 anchor: new google.maps.Point(0, 0) // anchor
